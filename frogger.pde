@@ -5,7 +5,8 @@ rectangle rect,rect2,rect3,rect4;
 GameMenu gamemenu;
 GuideScreen guidescreen;
 PImage bg,bgGuide,bgEnd;
-int gameScreen = 0;
+int gameScreen = 4;
+Level_2 level2;
 
 //reset
 void resetGame() {
@@ -29,10 +30,11 @@ void setup(){
   size(1000,1000 );
   resetGame();
   gamemenu = new GameMenu();
+   level2=new Level_2();
   guidescreen =new GuideScreen();
-  bg = loadImage("data/frogger800-650.jpeg");
-  bgGuide =loadImage("data/froggerGuide800-650.png");
-  bgEnd=loadImage("data/froggerWin800-650.jpeg");
+  bg = loadImage("data/images/inro game.jpg");
+  bgGuide =loadImage("data/images/froggerGuide800-650.png");
+  bgEnd=loadImage("data/images/froggerWin800-650.jpeg");
   rectMode(CENTER); //center the rectangle
   stroke(245, 245, 245); //button border
   textSize(45); //text inside buttons
@@ -62,6 +64,9 @@ else if (gameScreen == 2) {
 else if (gameScreen == 3) {
     fourthScreen();
     //TimerReset();
+  }else if(gameScreen ==4)
+  {
+    level2.Drawlevel2();
   }
 
 }
