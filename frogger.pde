@@ -173,7 +173,7 @@ void draw_path()
 {
   //row1
   
-  int index=0;
+   int index=0;
    for (int i = 0; i < 2; i++) {
     float x =0;
     float y= height-1.25*grid-1.25*i*grid;
