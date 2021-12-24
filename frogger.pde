@@ -5,7 +5,7 @@ rectangle rect,rect2,rect3,rect4;
 GameMenu gamemenu;
 GuideScreen guidescreen;
 PImage bg,bgGuide,bgEnd;
-int gameScreen = 4;
+int gameScreen = 0;
 Level_2 level2;
 
 //reset

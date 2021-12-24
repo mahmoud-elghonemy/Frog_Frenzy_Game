@@ -11,9 +11,8 @@ class Level_2 {
     rectangle rect5=new rectangle(0 ,0,width,1.25*grid);
     rectangle rectFinal=new rectangle(0 ,0,width,1.25*grid);
     PImage IRec2=loadImage("data/images/road.jpg");
-   // PImage IRec1=loadImage("data/images/MicrosoftTeams-image (1).png");
     PImage IRec3=loadImage("data/images/gross.jpg");
-   // PImage IRec5=loadImage("data/images/MicrosoftTeams-image (3).png");
+   
   PShape Icar[]= new PShape[5];
   Level_2()
   { 
