@@ -1,4 +1,6 @@
 class GameMenu {
+  Level_2 level_2=new Level_2();
+  level1 Level1=new level1();
   boolean Menu = true, Play;
   float Button1 = 50, Button2 = 50, Button3 = 50 ,Button4=100 ; //opacity
   
@@ -33,12 +35,17 @@ class GameMenu {
     if (Menu) {
       if (mouseX > 800 - 100 && mouseX < 800 + 100 
       && mouseY > 775 - 75 - 25 && mouseY < 900 - 75 ) { //pointer collision with Button1
-        if (mousePressed) {  
-          secondScreen();
+        if (mousePressed) {
+          file.play();
+          file.loop();
+          gameScreen=1;
+          resetGame();
+          //resetGame();
+          //Level1.drawlevel1();
           //fill(255, 77, 80, Button4); //Button margin colour
           //draw_back();
           //TimerDisplay();
-          resetGame();
+         // resetGame();
         }
         if (Button1 < 150) { //Highlighting effect by darkening the colour for button 1
           Button1 += 200;

@@ -1,24 +1,32 @@
 class Level_2 {
-    float grid = 100;
-    Car cars[];
-   // PImage Icar[];
-    float arrRnd[][]=new float[2][5];
-    
-    rectangle rect1=new rectangle(0 ,height-1.25*grid ,width,1.25*grid);
-    rectangle rect2=new rectangle(0 ,height-3*1.25*grid ,width,2*1.25*grid);
-    rectangle rect3=new rectangle(0 ,height-4*1.25*grid ,width,1.25*grid);
-    rectangle rect4=new rectangle(0 ,height-7*1.25*grid ,width,3*1.25*grid);
-    rectangle rect5=new rectangle(0 ,0,width,1.25*grid);
-    rectangle rectFinal=new rectangle(0 ,0,width,1.25*grid);
-    PImage IRec2=loadImage("data/images/road.jpg");
-    PImage IRec3=loadImage("data/images/gross.jpg");
-   
-  PShape Icar[]= new PShape[5];
+int score=0;
+Frog frog;
+path paths[];
+Coin coin[];
+int lives=4;
+Timer timer; 
+float grid = 100;
+Car cars[];
+rectangle rect1,rect2,rect3,rect4,rect5,rectFinal;
+PImage IRec2,IRec3;
+float arrRnd[][]=new float [2][5];
+  PShape Icar[]= new PShape[5];;
   Level_2()
   { 
+     rect1=new rectangle(0 ,height-1.25*grid ,width,1.25*grid);
+     rect2=new rectangle(0 ,height-3*1.25*grid ,width,2*1.25*grid);
+     rect3=new rectangle(0 ,height-4*1.25*grid ,width,1.25*grid);
+     rect4=new rectangle(0 ,height-7*1.25*grid ,width,3*1.25*grid);
+     rect5=new rectangle(0 ,0,width,1.25*grid);
+     rectFinal=new rectangle(0 ,0,width,1.25*grid);
+     IRec2=loadImage("data/images/road.jpg");
+     IRec3=loadImage("data/images/green2.jpg");
+    score=0;
+    timer = new Timer(65);
+    frog = new Frog(0.25*grid, height-0.75*grid, 0.75*grid);
+    paths =  new path[36];
+    coin = new Coin[16];
     cars = new Car[5];
-    //Icar =new PImage[5];
-
    for(int i=0;i<5;i++)
    {
      arrRnd[0][i]=random(0,width);
@@ -30,12 +38,6 @@ class Level_2 {
       Icar[3]=loadShape("data/images/car10.svg");
       Icar[4]=loadShape("data/images/car9.svg");
   }
-   
-   
-   
-    
-   
-  
    void Drawlevel2()
    {  
      //back ground
@@ -57,30 +59,18 @@ class Level_2 {
              if(!(cars[i].intersect(cars[j])) && bb==true)
              {  bb=false;
                 
-             }else {
+             }
+             else {
                break;
              }
          }
-         
          if(!bb)
          {
            shape(Icar[i],cars[i].x,cars[i].y,cars[i].w,cars[i].h);
          }
          bb=true;
-        
-         
-         
-        }
-     
-        
-   }
-
-
-
-
-
-
-
-
-
-}
+        }    
+   }//end draw
+   
+   
+   }//end class

@@ -1,76 +1,87 @@
-Frog frog;
-path paths[];
-float grid = 100;
-rectangle rect,rect2,rect3,rect4;
+int gameScreen = 0;
+gameOver over;
+passedLevel Passed;
 GameMenu gamemenu;
 GuideScreen guidescreen;
 PImage bg,bgGuide,bgEnd;
-int gameScreen = 0;
+PFont font;
+float grid = 100;
+PShape cuore;
+Timer timer; 
+level1 Level1;
 Level_2 level2;
-
-//reset
-void resetGame() {
-  frog = new Frog(0.25*grid, height-0.75*grid, 0.75*grid);
-  paths =  new path[36];
-  draw_path();
-  frog.showUp();
+//import sound library
+import processing.sound.*; //sound is package
+SoundFile file;     //soundFile is class 
   
-}
-
-//resume
-void resume()
-{
-  
-
-}
-
-
-//setup
+//attaching audio file
+String audioName = "data/frogger-sound.wav"; 
+String p;
 void setup(){
-  size(1000,1000 );
+  Level1 = new level1();
+  level2=new Level_2();
   resetGame();
+  
+  font = loadFont("ArialUnicodeMS-48.vlw");
+  textFont(font);
+  
+  cuore = loadShape("cuore.svg");
+  
+  size(1000,1000);
+  
+  noStroke();
+  
+   //Audio file loading 
+   p = sketchPath(audioName);
+  file = new SoundFile(this, p);
+  
   gamemenu = new GameMenu();
-   level2=new Level_2();
+  // level2=new Level_2();
   guidescreen =new GuideScreen();
-  bg = loadImage("data/images/inro game.jpg");
+  bg = loadImage("data/images/intro game.png");
   bgGuide =loadImage("data/images/froggerGuide800-650.png");
   bgEnd=loadImage("data/images/froggerWin800-650.jpeg");
   rectMode(CENTER); //center the rectangle
   stroke(245, 245, 245); //button border
   textSize(45); //text inside buttons
   noStroke();
-  //path
-rect=new rectangle(1.25*grid,height-(1.25*grid),width-1.25*grid,1.25*grid);
-rect2=new rectangle(0,height-3*1.25*grid,width-1.25*grid,1.25*grid);
-rect3=new rectangle(1.25*grid,height-5*1.25*grid,width-1.25*grid,1.25*grid);
-rect4=new rectangle(0,height-7*1.25*grid,width-1.25*grid,1.25*grid);
 }
 
-//draw
+void resetGame() {
+if(gameScreen==1){
+ Level1.score=0;
+ Level1.lives --; 
+ Level1.timer = new Timer(65);
+ Level1.coinarray();  
+ }
+ else if (gameScreen==2)
+  {
+ level2.score=0;
+ level2.lives --; 
+ level2.timer = new Timer(65);
+ //level2.coinarray();  
+  }
+}
+
 void draw(){
-  //secondScreen();
-  
   if (gameScreen == 0) {
   firstScreen();
 }
 else if (gameScreen == 1) {
-    secondScreen();
-    //TimerDisplay();
-    //playerScore();
+    Level1.drawlevel1();
 }
-else if (gameScreen == 2) {
+else if (gameScreen == 5) {
     thirdScreen();
   } 
-else if (gameScreen == 3) {
+else if (gameScreen == 6) {
     fourthScreen();
-    //TimerReset();
-  }else if(gameScreen ==4)
+  }
+else if(gameScreen ==2)
   {
     level2.Drawlevel2();
   }
 
 }
-
 
 //game menu first screen
 void firstScreen() {
@@ -79,57 +90,11 @@ void firstScreen() {
   background(bg);
   gamemenu.startMenu();
 }
-
-//gameplay second screen
-void secondScreen()
-{
-  gameScreen = 1; 
-  background(255);
-  rect.DrawRec();
-  rect2.DrawRec();
-  rect3.DrawRec();
-  rect4.DrawRec();
-  for (path pat : paths) {
-    pat.show();
-   /* if ((frog.intersect(pat))) {
-      resetGame();
-   }*/
-   if(frog.intersect(rect) || frog.intersect(rect2) || frog.intersect(rect3) || frog.intersect(rect4))
-   {
-        resetGame();
-    }
- 
-  //frog
-  if (keyCode == UP){
-    frog.showUp();
-   }
-  else if (keyCode == LEFT){
-    frog.showLeft();
-  }
-  else if (keyCode == DOWN){
-    frog.showDown();
-  }
-  else if (keyCode == RIGHT){
-    frog.showRight();
-  }
-  else if (keyCode == ALT)
-  {
-    //exit(); 
-   firstScreen();
-   //gameScreen=0;
-  }
-  else{
-    frog.showUp();
-  }
-}
-
-}
-
-
+   
 // third screen
 void thirdScreen()
 {
-  gameScreen = 2; 
+  gameScreen = 5; 
   bgGuide.resize(1000,1000);
   background(bgGuide); 
   draw_back();
@@ -141,103 +106,56 @@ void thirdScreen()
 // third screen
 void fourthScreen()
 {
-gameScreen = 3; 
+gameScreen = 6; 
 bgEnd.resize(1000,1000);
 background(bgEnd);
 //endscreen.EndText();
 //endscreen.EndMenu();
 }
 
-
-//movement
 void keyPressed()
 {
   if (keyPressed){
-    if (keyCode == UP  && frog.y>0 ){
-      frog.move(0,-1);
+    if (keyCode == UP){
+      Level1.frog.move(0,-1);
     }
-    else if (keyCode == LEFT &&  frog.x>0){
-      frog.move(-1,0);
+    else if (keyCode == LEFT ){
+      Level1.frog.move(-1,0);
     }
-    else if (keyCode == DOWN && frog.y+frog.h<height){
-      frog.move(0,1);
+    else if (keyCode == DOWN ){
+      Level1.frog.move(0,1);
     }
-    else if (keyCode == RIGHT && frog.x+frog.w<width){
-      frog.move(1,0);
+    else if (keyCode == RIGHT ){
+      Level1.frog.move(1,0);
     }
+    else if (keyCode == ENTER){
+    resume resume=new resume(500,500,500,500);
+    resume.show_resume();
   }
+    else  if(keyCode== ' ') {
+      //resetGame();
+      //loop();
+      if(gameScreen==1 && (Level1.lives==0 || Level1.time==0))
+      {
+        
+      resetGame();
+      Level1.lives=3;
+      Level1.score=0;
+      Level1.timer.setTime(65);
+      loop();
+      redraw();
+      }
+      else if (gameScreen == 2)
+      {//noLoop();
+     level2=new Level_2();
+     level2.lives=4;
+      resetGame();
+      redraw();
+      }
+  }
+ }
 }
 
-//path for first level
-void draw_path()
-{
-  //row1
-  
-   int index=0;
-   for (int i = 0; i < 2; i++) {
-    float x =0;
-    float y= height-1.25*grid-1.25*i*grid;
-    paths[index] = new path(x, y, 1.25*grid, 1.25*grid);
-    index++;
-  }
- 
-  //row2
-   
-  
-  for (int i = 0; i < 7; i++) {
-   float x = 1.25*grid+i*1.25*grid;
-   float y= height-2*1.25*grid;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
-   index++;
-  }
-  
-  //row3
-   for (int i = 0; i < 2; i++) {
-    float x = width-1.25*grid;
-  float y= height-3*1.25*grid-1.25*i*grid;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
-    index++;
-  }
-  
-  //row4
-   for (int i = 0; i < 7; i++) {
-   float x = width-2*1.25*grid-i*grid*1.25;
-   float y= height-4*1.25*grid;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
-   index++;
-  }
-  
-  //row5
-   for (int i = 0; i < 2; i++) {
-    float x = 0;
-    float y= height-5*1.25*grid-i*grid*1.25;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
-    index++;
-  }
-  
-  //row6
-   for (int i = 0; i < 7; i++) {
-   float x = 1.25*grid+i*1.25*grid;
-   float y= height-6*1.25*grid;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
-   index++;
-  }
-  //row7
-    for (int i = 0; i < 2; i++) {
-    float x = width-1.25*grid;
-    float y= height-7*1.25*grid-i*grid*1.25;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
-    index++;
-  }
-  //row8
-   for (int i = 0; i < 7; i++) {
-   float x =i*grid*1.25;
-   float y= 0;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
-   index++;
-  }
-
-}
 void draw_back()
 {
   int i=1;

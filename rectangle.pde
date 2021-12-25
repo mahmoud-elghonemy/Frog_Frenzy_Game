@@ -5,6 +5,7 @@ class rectangle {
        float h;
        PImage  water = loadImage("data/water.jpg");
       // water.resize((int)w, (int)w);
+      
        rectangle(float x, float y, float w, float h){
           this.x = x;
           this.y = y;
@@ -13,7 +14,7 @@ class rectangle {
        
          
        }
-       //   water.resize((int)w, (int)w);
+       
        boolean intersect(rectangle other){
           
           float left = x;
@@ -31,7 +32,7 @@ class rectangle {
        void DrawRec(){
        fill(0,0,204);
        image(water,this.x,this.y,this.w,this.w);
-    //   rect(this.x,this.y,this.w,this.h);
+   
        }
        
         

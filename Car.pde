@@ -11,6 +11,4 @@ class Car extends rectangle
    //for() 
   
   } 
-  
-  
 }

@@ -1,4 +1,5 @@
 class GuideScreen {
+  level1 Level1=new level1();
   boolean MenuGuide = true, Play;
   float B1 = 100, B2 = 100;
   
@@ -17,10 +18,6 @@ class GuideScreen {
     
     textSize(28);
     text("Good Luck!", (width /2) - (textWidth("Good Luck!") / 2), 220);  
-    
-    
-    //SCORE
-    //TIMER
   }
   
   void GuideMenu() {  
@@ -42,9 +39,10 @@ class GuideScreen {
     if (MenuGuide) {
       if (mouseX > width/2 - 100 && mouseX < width/2 + 100 
       && mouseY > height/2 + 280 - 25 && mouseY < height/2 +280 + 25) { //pointer collision with Button1
-        if (mousePressed) {  
-          secondScreen();
-          //TimerDisplay();
+        if (mousePressed) { 
+          file.play();
+          file.loop();
+          gameScreen=1;
           resetGame();
         }
         if (B1 < 150) { //Highlighting effect by darkening the colour for button 1
