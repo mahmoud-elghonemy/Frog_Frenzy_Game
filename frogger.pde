@@ -10,6 +10,7 @@ PShape cuore;
 Timer timer; 
 level1 Level1;
 Level_2 level2;
+Level_3 level3;
 //import sound library
 import processing.sound.*; //sound is package
 SoundFile file;     //soundFile is class 
@@ -20,6 +21,7 @@ String p;
 void setup(){
   Level1 = new level1();
   level2=new Level_2();
+  level3=new Level_3();
   resetGame();
   
   font = loadFont("ArialUnicodeMS-48.vlw");
@@ -27,7 +29,7 @@ void setup(){
   
   cuore = loadShape("cuore.svg");
   
-  size(1000,1000);
+  size(990,1000);
   
   noStroke();
   
@@ -36,7 +38,6 @@ void setup(){
   file = new SoundFile(this, p);
   
   gamemenu = new GameMenu();
-  // level2=new Level_2();
   guidescreen =new GuideScreen();
   bg = loadImage("data/images/intro game.png");
   bgGuide =loadImage("data/images/froggerGuide800-650.png");
@@ -56,10 +57,18 @@ if(gameScreen==1){
  }
  else if (gameScreen==2)
   {
- level2.score=0;
  level2.lives --; 
+ level2.score=0;
  level2.timer = new Timer(65);
- //level2.coinarray();  
+ level2.coinarray();
+ 
+  }
+  else if (gameScreen==3)
+  {
+ level3.lives --; 
+ level3.score=0;
+ level3.timer = new Timer(65);
+ level3.coinarray();  
   }
 }
 
@@ -80,13 +89,17 @@ else if(gameScreen ==2)
   {
     level2.Drawlevel2();
   }
+  else if(gameScreen ==3)
+  {
+    level3.Drawlevel3();
+  }
 
 }
 
 //game menu first screen
 void firstScreen() {
   gameScreen = 0; 
-  bg.resize(1000,1000);
+  bg.resize(990,1000);
   background(bg);
   gamemenu.startMenu();
 }
@@ -95,7 +108,7 @@ void firstScreen() {
 void thirdScreen()
 {
   gameScreen = 5; 
-  bgGuide.resize(1000,1000);
+  bgGuide.resize(990,1000);
   background(bgGuide); 
   draw_back();
   guidescreen.GuideText();
@@ -103,12 +116,13 @@ void thirdScreen()
 
 }
 
-// third screen
+// third screen end game
 void fourthScreen()
 {
 gameScreen = 6; 
-bgEnd.resize(1000,1000);
+bgEnd.resize(990,1000);
 background(bgEnd);
+text("Congratulations!.you passed all levels",width/2-(textWidth("press spacepar to play next level") / 2),800);
 //endscreen.EndText();
 //endscreen.EndMenu();
 }
@@ -116,6 +130,7 @@ background(bgEnd);
 void keyPressed()
 {
   if (keyPressed){
+    if(gameScreen==1){
     if (keyCode == UP){
       Level1.frog.move(0,-1);
     }
@@ -133,25 +148,83 @@ void keyPressed()
     resume.show_resume();
   }
     else  if(keyCode== ' ') {
-      //resetGame();
-      //loop();
-      if(gameScreen==1 && (Level1.lives==0 || Level1.time==0))
+      if( (Level1.lives==0 || Level1.time<=0))
       {
-        
+      Level1.lives=4;
       resetGame();
-      Level1.lives=3;
-      Level1.score=0;
-      Level1.timer.setTime(65);
       loop();
       redraw();
       }
-      else if (gameScreen == 2)
-      {//noLoop();
-     level2=new Level_2();
-     level2.lives=4;
+      
+    }
+    else
+      {
+      //  gameScreen ++;
+        level2.lives=4;
+        resetGame();
+        redraw();
+      }
+  }
+  
+  if(gameScreen==2){
+    if (keyCode == UP){
+      level2.frog.move(0,-1);
+    }
+    else if (keyCode == LEFT ){
+      level2.frog.move(-1,0);
+    }
+    else if (keyCode == DOWN ){
+      level2.frog.move(0,1);
+    }
+    else if (keyCode == RIGHT ){
+      level2.frog.move(1,0);
+    }
+    else if (keyCode == ENTER){
+    resume resume=new resume(500,500,500,500);
+    resume.show_resume();
+  }
+    else  if(keyCode== ' ') {
+      //resetGame();
+      //loop();
+      if( (level2.lives==1 || level2.time<=0))
+      {
+      level2.lives=4;
       resetGame();
+      loop();
       redraw();
       }
+     
+    }
+  }
+  //
+  
+  if(gameScreen==3){
+    if (keyCode == UP){
+      level3.frog.move(0,-1);
+    }
+    else if (keyCode == LEFT ){
+      level3.frog.move(-1,0);
+    }
+    else if (keyCode == DOWN ){
+      level3.frog.move(0,1);
+    }
+    else if (keyCode == RIGHT ){
+      level3.frog.move(1,0);
+    }
+    else if (keyCode == ENTER){
+    resume resume=new resume(500,500,500,500);
+    resume.show_resume();
+  }
+    else  if(keyCode== ' ') {
+      if( (level3.lives==1 || level3.time<=0))
+      {
+      level3.lives=4;
+      resetGame();
+      loop();
+      redraw();
+      }
+     
+    }
   }
  }
 }
@@ -160,7 +233,6 @@ void draw_back()
 {
   int i=1;
   fill(0);
-  //ellipse(38*i,25*i,i*40,i*40);
   ellipse(45*i,45*i,i*40,i*40);
   fill(255,255,255);
   beginShape();
@@ -193,4 +265,37 @@ void draw_back()
           gameScreen=0; //menue
         }
       }
+}
+
+void play(int gameScreen)
+{
+textSize(30);
+fill(225,255,255);
+if(gameScreen == 1)
+{
+  text("Level:1 ",width/2-textWidth("Level:1 ")/2-50,30);
+  text("score: "+ Level1.score,0,60);
+  text("Time: "+ round(Level1.time),0,100);
+  for(int i=0; i<Level1.lives; i++){
+  shape(cuore, 100+i*40, 10, 30,30);
+ }
+}
+else if(gameScreen == 2)
+{
+  text("Level:2 ",width/2-textWidth("Level:2 ")/2,60);
+  text("score: "+ level2.score,0,60);
+text("Time: "+ round(level2.time),0,100);
+ for(int i=0; i<level2.lives; i++){
+  shape(cuore, 10+i*40, 10, 30,30);
+ }
+}
+else if(gameScreen == 3)
+{
+text("Level:3 ",width/2-textWidth("Level:3 ")/2,60);
+text("score: "+ level3.score,0,60);
+text("Time: "+ round(level3.time),0,100);
+ for(int i=0; i<level3.lives; i++){
+  shape(cuore, 10+i*40, 10, 30,30);
+ }
+ }
 }

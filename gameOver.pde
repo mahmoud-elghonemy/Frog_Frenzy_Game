@@ -7,7 +7,6 @@ gameOver(float x, float y, float w, float h)
   loss.resize(600,300);
 }
 void endgame(){
-  //noLoop();
      background(70,55,113,300);
      image(loss,200,150);
      textSize(100); 
@@ -16,12 +15,23 @@ void endgame(){
      text("press spacepar to play again",width/2-textWidth("press spacepar to play again")/2,650);
      
    if(keyCode== ' '){
+     if (gameScreen==1 )
+     {
       gameScreen=1;
-      resetGame();
       Level1.lives=4;
-      Level1.score=0;
-      Level1.timer.setTime(65);
-      //loop();
+     }
+     
+     else if (gameScreen==2)
+     {
+      gameScreen=2;
+      level2.lives=4;
+     }
+     else if (gameScreen==3)
+     {
+      gameScreen=3;
+      level3.lives=4;
+     }
+     resetGame();
       redraw();
   }
   }

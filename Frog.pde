@@ -1,6 +1,6 @@
 class Frog extends rectangle{
     PImage up, left, right, down;  //images
-    
+    Log attached = null;
   //constructor
   Frog(float x, float y, float w){
      super(x,y,w, w);
@@ -17,6 +17,10 @@ class Frog extends rectangle{
      
      right = loadImage("data/right.png");
      right.resize((int)w, (int)w);
+  }
+  // attach log
+  void attach(Log log) {
+    attached = log;
   }
   
    
@@ -47,6 +51,11 @@ class Frog extends rectangle{
    
   void update()
   {
+     if (attached != null) {
+      x += attached.speed;
+    }
+
+    x = constrain(x, 0, width-w);
   }
     
   //move

@@ -117,6 +117,10 @@ void drawlevel1(){
     if(frog.intersect(paths[29])){
       Passed= new passedLevel(0,0,width,height);
       Passed.win(1);
+      gameScreen=2; //level2
+      level2.lives=4;
+      resetGame();
+      redraw();
     }
     if(frog.intersect(rect) || frog.intersect(rect2) || frog.intersect(rect3) || frog.intersect(rect4))
    {
@@ -140,14 +144,16 @@ void drawlevel1(){
   timer.countDown(); 
   time=timer.getTime();
   if(time<=0){
-    for (Coin coins : coin) {
+   for (Coin coins : coin) {
      coins.x=-100;
        coins.y=-100;
     }
     frog.w=0;
+   
     
   over=new gameOver(0,0,width,height);
          over.endgame();
+         
   }
     
    
@@ -181,28 +187,23 @@ void drawlevel1(){
     resume resume=new resume(500,500,500,500);
     resume.show_resume();
   }
-  else if(keyCode== ' ' && (lives==0 || time==0)){
-    gameScreen=1;
+  else if(keyCode== ' ' && (lives==0 || time<=0)){
+      gameScreen=1;
+      this.lives=4;
       resetGame();
-      lives=4;
-      score=0;
-      this.timer.setTime(65);
-      //loop();
       redraw();
-  }else {
+  }/*
+  else if(keyCode== ' '){
+      gameScreen=2;
+      level2.lives=4;
+      resetGame();
+      redraw();
+  }*/
+  else {
     frog.showUp();
   }
-play();
+play(1);
 }
 //end draw
-void play()
-{
-  textSize(40);
-fill(0);
-text("score: "+ score,width-200,50);
-text("Time: "+ round(time),width-200,100);
- for(int i=0; i<this.lives; i++){
-  shape(cuore, 10+i*40, 10, 30,30);
- }
-}
+
 }
