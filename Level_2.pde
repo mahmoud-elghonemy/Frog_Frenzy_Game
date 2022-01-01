@@ -1,7 +1,6 @@
 class Level_2 {
 int score=0;
 Frog frog;
-path paths[];
 Coin coin[];
 int lives=4;
 Timer timer; 
@@ -13,10 +12,8 @@ Car muv_cars[];
 
 rectangle rect1,rect2,rect3,rect4,rect5,rectFinal;
 PImage IRec2,IRec3,IRec4;
-//float arrRnd[][]=new float [2][5];
-//PShape Icar[]= new PShape[3];
-//PImage IcarI[]=new PImage[2];
-  Level_2()
+
+Level_2()
   { 
      rect1=new rectangle(0 ,height-1.25*grid ,width,1.25*grid);
      rect2=new rectangle(0 ,height-3*1.25*grid ,width,2*1.25*grid);
@@ -28,12 +25,11 @@ PImage IRec2,IRec3,IRec4;
      IRec2=loadImage("data/images/road.jpg"); //road
      IRec3=loadImage("data/images/green2.jpg"); //grass
      IRec4=loadImage("data/frog9.png");
-     //blue_car=loadImage("data/images/car1.png");//blue car
+     
     score=0;
     timer = new Timer(65);
     frog = new Frog(width/2-(0.75*grid)/2, height-0.75*grid, 0.75*grid);
     
-    paths =  new path[36];
     coin = new Coin[12];
     cars = new Car[6];
     
@@ -78,6 +74,7 @@ PImage IRec2,IRec3,IRec4;
       IcarI[0]=blue_car;
       IcarI[1]=blue_car;
       */
+      
       for(int i=0;i<3;i++) // fixed cars
       {
         cars[i]=new Car(i*300+grid,height-3*1.25*grid+40,150,75,0,0);
@@ -98,10 +95,10 @@ PImage IRec2,IRec3,IRec4;
     float x=0.75*grid + j*250;
       float y;
     if (i <= 1){
-        y= height- grid - i*3*1.25*grid;
+        y= height- grid - i*3*1.25*grid+20;
     }
     else{
-          y= height- grid - i*3*1.45*grid;
+          y= height- grid - i*3*1.45*grid+25;
     }
     coin[k++]= new Coin(x , y, 80);
    
@@ -170,19 +167,24 @@ PImage IRec2,IRec3,IRec4;
             coins.y=-100;
            }
           frog.w=0;
-          over=new gameOver(0,0,width,height);
-          over.endgame();
+          l=2;
+          gameScreen =4;
         }
-       else{
-        frog.x=0.25*grid;
+       else{ 
+        frog.x=width/2-(0.75*grid)/2;
         frog.y=height-0.75*grid;
         resetGame();
          }
     }
   if( (frog.intersect(rectFinal))) //win
   {
-    Passed= new passedLevel(0,0,width,height);
-    Passed.win(2);
+    //Passed= new passedLevel(0,0,width,height);
+   // Passed.win(2);
+      frog.x=-100;
+      for (Coin coins : level2.coin) {
+            coins.x=-100;
+            coins.y=-100;
+           }
     gameScreen=3;
     level3.lives=4;
     resetGame();
@@ -191,22 +193,25 @@ PImage IRec2,IRec3,IRec4;
         
   timer.countDown(); 
   time=timer.getTime();
-  if(time<=0){
+  if(time<=0 && this.lives==1){
     for (Coin coins : coin) {
      coins.x=-100;
        coins.y=-100;
     }
     frog.w=0;
-    
-  over=new gameOver(0,0,width,height);
-         over.endgame();
+    l=2;
+    gameScreen =4;
+  }
+  else if (time<=0)
+  {
+    frog.x=width/2-(0.75*grid)/2;
+    frog.y=height-0.75*grid;
+    resetGame();
   }
         //show coins
   for (Coin coins : coin) {
       coins.showCoin();
     if (frog.intersect(coins)){
-      //if( (frog.x>= coins.x && index%2==0 ) || (frog.x<= coins.x && index%2!=0 ) ){
-      
        coins.x=-100;
        coins.y=-100;
        this.score+=1;

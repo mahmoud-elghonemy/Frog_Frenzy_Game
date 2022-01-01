@@ -12,12 +12,17 @@ class GuideScreen {
     (textWidth("Control the Frog with 4 Arrows Keys") / 1.9), 110);  
     
     textSize(20);
-    text("Your goal is to guide the frog to safety lane from \nthe bottom of the screen to the safety lane on the top", (width /2) - 
-    (textWidth("Your goal is to guide the frog to safety lane from \nthe bottom of the screen to the safety lane on the top")
-    / 2), 150);  
+   
+   text("Your goal is to guide the frog to safety lane from"
+   ,(width /2) - (textWidth("Your goal is to guide the frog to safety lane from")/ 2), 170); 
+   
+   text("the bottom of the screen to the safety lane on the top to up to next level",(width /2) - (textWidth("the bottom of the screen to the safety lane on the top to up to next level")/ 2), 210);
+    
+    textSize(20);
+    text("and collect more coins to get high score",(width /2) -(textWidth("and collect more coins to get high score") /2),250 );
     
     textSize(28);
-    text("Good Luck!", (width /2) - (textWidth("Good Luck!") / 2), 220);  
+    text("Good Luck!", (width /2) - (textWidth("Good Luck!") / 2), 310);  
   }
   
   void GuideMenu() {  

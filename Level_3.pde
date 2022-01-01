@@ -2,7 +2,6 @@ class Level_3 {
 int score=0;
 int lives=4;
 Frog frog;
-path paths[];
 Coin coin[];
 Timer timer; 
 float time;
@@ -12,8 +11,10 @@ Log log[];
 Car muv_cars[];
 rectangle rect1,rect2,rect3,rect4,rect5,rectFinal;
 PImage IRec1,IRec2,IRec3,IRec4;
+boolean ok = false;
 Level_3()
 {
+     ok = false;
      rect1=new rectangle(0 ,height-1.25*grid ,width,1.25*grid);
      rect2=new rectangle(0 ,height-3*1.25*grid ,width,2*1.25*grid);
      rect3=new rectangle(0 ,height-4*1.25*grid ,width,1.25*grid);
@@ -39,20 +40,22 @@ Level_3()
     for(int i=0; i<3 ;i++){
      // float x = (width-grid)+ 420*i;
      float x=i*300+grid; //width of car=100 
-      muv_cars[in] = new Car(x, height-3*1.25*grid+40, 140 , 85,15,in);
+      muv_cars[in] = new Car(x, height-3*1.25*grid+40, 140 , 85,20,in);
       in++;
       //row2
     }
     for(int i=0; i<3 ;i++){
       float x =  width-i*300-grid;
-     muv_cars[in] = new Car(x, height-3*1.25*grid+150, 140 , 85,-20,in);
+     muv_cars[in] = new Car(x, height-3*1.25*grid+150, 140 , 85,-15,in);
      in++;
     }
     
     log = new Log[7];
-
+}
+ void logsArray(){
+     
   // ROW 3
-  in=0;
+    int in=0;
   for (int i = 0; i < 2; i++) {
     float x = i * 450 + 100;
     log[in] = new Log(x, height-grid*6, 3*grid, 0.7*grid, 20,in);
@@ -70,9 +73,8 @@ Level_3()
     log[in] = new Log(x, height-grid*8.4, grid*3, 0.7*grid, 10,in);
     in++;
   }
-    
-
-}
+ 
+ }
 
  void coinarray(){
   int k=0;
@@ -81,10 +83,10 @@ Level_3()
     float x=0.75*grid + j*250;
       float y;
     if (i <= 1){
-        y= height- grid - i*3*1.25*grid;
+        y= height- grid - i*3*1.25*grid+20;
     }
     else{
-          y= height- grid - i*3*1.45*grid;
+          y= height- grid - i*3*1.45*grid+25;
     }
     coin[k++]= new Coin(x , y, 80);
    
@@ -114,7 +116,7 @@ void Drawlevel3()
                    //intersect car
  if( (frog.intersect(muv_cars[0])) || (frog.intersect(muv_cars[1])) || (frog.intersect(muv_cars[2]))
   || (frog.intersect(muv_cars[3])) || (frog.intersect(muv_cars[4])) || (frog.intersect(muv_cars[5]))
-  /*|| (frog.intersect(rect4))*/
+   
 )
    {
         if (this.lives == 1 ){
@@ -122,20 +124,26 @@ void Drawlevel3()
             coins.x=-100;
             coins.y=-100;
            } 
+           for (Log logs : log) {
+            logs.x=-100;
+            logs.y=-100;
+           } 
           frog.w=0;
-          over=new gameOver(0,0,width,height);
-          over.endgame();
+         l=3;
+         gameScreen =4;
         }
        else{
-        frog.x=0.25*grid;
+        frog.x=width/2-(0.75*grid)/2;
         frog.y=height-0.75*grid;
         resetGame();
          }
     }
   if( (frog.intersect(rectFinal))) //win
   {
-    Passed= new passedLevel(0,0,width,height);
-    Passed.win(3);
+    //Passed= new passedLevel(0,0,width,height);
+    //Passed.win(3);
+    level3.frog.x=-100;
+    gameScreen=6;
     gameScreen=6;
     resetGame();
       redraw();
@@ -143,22 +151,21 @@ void Drawlevel3()
         
   timer.countDown(); 
   time=timer.getTime();
-  if(time<=0){
-   /* for (Coin coins : coin) {
-     coins.x=-100;
-       coins.y=-100;
-    }*/
+  if(time<=0 && this.lives ==1){
     frog.w=0;
-    
-  over=new gameOver(0,0,width,height);
-         over.endgame();
+      l=3;
+      gameScreen=4;
+  }
+  else if (time<=0)
+  {
+    frog.x=width/2-(0.75*grid)/2;
+    frog.y=height-0.75*grid;
+    resetGame();
   }
         //show coins
   for (Coin coins : coin) {
       coins.showCoin();
     if (frog.intersect(coins)){
-      //if( (frog.x>= coins.x && index%2==0 ) || (frog.x<= coins.x && index%2!=0 ) ){
-      
        coins.x=-100;
        coins.y=-100;
        this.score+=1;
@@ -171,27 +178,42 @@ void Drawlevel3()
     logs.ShowCar('l');
     logs.update();
     }
-    /*
-    if (frog.y < height-7.25*grid && frog.y > grid*-4.25) {
+    if (frog.intersect(rect4)) {
     boolean ok = false;
     for (Log log : log) {
       if (frog.intersect(log)) {
         ok = true;
         frog.attach(log);
       }
-    }
-    if (!ok) {
-      resetGame();
     
-  } else {
+    }
+
+    if (!ok ) {
+          if (this.lives == 1 ){
+          for (Coin coins : coin) {
+            coins.x=-100;
+            coins.y=-100;
+           } 
+           for (Log logs : log) {
+            logs.x=-100;
+            logs.y=-100;
+           } 
+          frog.w=0;
+          l=3;
+          gameScreen=4;
+        }
+        else{
+      frog.x=0.25*grid;
+      frog.y=height-0.75*grid;
+      resetGame();}
+    
+  } }
+  else {
     frog.attach(null);
   }
 
   frog.update();
-  frog.showUp();
-}*/
-   
-         //frog
+     //frog
   if (keyCode == UP){
     frog.showUp();
    }
@@ -227,8 +249,5 @@ void Drawlevel3()
   
    play(3);
 }
-
-
-
 
 }

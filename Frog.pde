@@ -55,7 +55,7 @@ class Frog extends rectangle{
       x += attached.speed;
     }
 
-    x = constrain(x, 0, width-w);
+     x = constrain(x, 0, width-w);
   }
     
   //move
@@ -66,7 +66,7 @@ class Frog extends rectangle{
     y += ydir *1.25*grid;
     x =constrain(x,0,width-w);
     y=constrain(y,+25,height-h);
-   
+    //attach(null);
   }
    
 }

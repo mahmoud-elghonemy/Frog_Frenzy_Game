@@ -1,12 +1,14 @@
-int gameScreen = 0;
-gameOver over;
-passedLevel Passed;
+int gameScreen = 3;
+int l=0;
+//gameOver over;
+//passedLevel Passed;
 GameMenu gamemenu;
 GuideScreen guidescreen;
-PImage bg,bgGuide,bgEnd;
+PImage bg,bgGuide,bgEnd,loss;
 PFont font;
 float grid = 100;
 PShape cuore;
+Frog frog;
 Timer timer; 
 level1 Level1;
 Level_2 level2;
@@ -18,12 +20,14 @@ SoundFile file;     //soundFile is class
 //attaching audio file
 String audioName = "data/frogger-sound.wav"; 
 String p;
+
 void setup(){
   Level1 = new level1();
   level2=new Level_2();
   level3=new Level_3();
   resetGame();
-  
+  loss=loadImage("lossfrog.jpeg");
+  loss.resize(600,300);
   font = loadFont("ArialUnicodeMS-48.vlw");
   textFont(font);
   
@@ -54,21 +58,25 @@ if(gameScreen==1){
  Level1.lives --; 
  Level1.timer = new Timer(65);
  Level1.coinarray();  
+// Level1.draw_path();
  }
  else if (gameScreen==2)
   {
  level2.lives --; 
- level2.score=0;
+ level2.score=Level1.score;
  level2.timer = new Timer(65);
  level2.coinarray();
  
   }
   else if (gameScreen==3)
   {
+ frog = new Frog(width/2-(0.75*grid)/2, height-0.75*grid, 0.75*grid);
  level3.lives --; 
- level3.score=0;
+ level3.score=level2.score;
  level3.timer = new Timer(65);
  level3.coinarray();  
+ level3.logsArray();
+ level3.frog.attach(null);
   }
 }
 
@@ -93,7 +101,12 @@ else if(gameScreen ==2)
   {
     level3.Drawlevel3();
   }
-
+else if(gameScreen ==4)
+  {
+    gameScreen=4;
+    endgame();
+    
+  }
 }
 
 //game menu first screen
@@ -122,9 +135,40 @@ void fourthScreen()
 gameScreen = 6; 
 bgEnd.resize(990,1000);
 background(bgEnd);
-text("Congratulations!.you passed all levels",width/2-(textWidth("press spacepar to play next level") / 2),800);
+text("Congratulations!.you passed all levels",width/2-(textWidth("press spacepar to play next level") / 2),850);
 //endscreen.EndText();
 //endscreen.EndMenu();
+}
+
+void endgame(){
+     
+     background(70,55,113,300);
+     image(loss,200,150);
+     textSize(100); 
+     text("GAME OVER",width/2-textWidth("GAME OVER")/2,550);
+     textSize(50); 
+     text("press spacepar to play again",width/2-textWidth("press spacepar to play again")/2,650);
+   
+   if(keyCode== ' '){
+     if (l==1 )
+     {
+      gameScreen=1;
+      Level1.lives=4;
+     }
+     
+     else if (l==2)
+     {
+      gameScreen=2;
+      level2.lives=4;
+     }
+     else if (l==3)
+     {
+      gameScreen=3;
+      level3.lives=4;
+     }
+     resetGame();
+      redraw();
+  }
 }
 
 void keyPressed()
@@ -152,7 +196,7 @@ void keyPressed()
       {
       Level1.lives=4;
       resetGame();
-      loop();
+    //  loop();
       redraw();
       }
       
@@ -190,7 +234,7 @@ void keyPressed()
       {
       level2.lives=4;
       resetGame();
-      loop();
+    //  loop();
       redraw();
       }
      
@@ -220,12 +264,15 @@ void keyPressed()
       {
       level3.lives=4;
       resetGame();
-      loop();
+    //  loop();
       redraw();
       }
      
     }
   }
+  
+  
+  
  }
 }
 

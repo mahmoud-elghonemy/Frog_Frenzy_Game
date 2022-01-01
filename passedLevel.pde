@@ -1,4 +1,4 @@
-class passedLevel extends rectangle{
+/*class passedLevel extends rectangle{
   PImage win;
 passedLevel(float x, float y, float w, float h)
 {
@@ -48,3 +48,4 @@ void win(int gameScreen){
   }
 
   }
+  */
