@@ -3,8 +3,8 @@ class rectangle {
        float y;
        float w;
        float h;
-       PImage  water = loadImage("data/water.jpg");
-      // water.resize((int)w, (int)w);
+     
+    
       
        rectangle(float x, float y, float w, float h){
           this.x = x;
@@ -31,7 +31,7 @@ class rectangle {
        }
        void DrawRec(){
        fill(0,0,204);
-       image(water,this.x,this.y,this.w,this.w);
+   
    
        }
        

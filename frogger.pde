@@ -1,4 +1,4 @@
-int gameScreen = 3;
+int gameScreen = 1;
 int l=0;
 //gameOver over;
 //passedLevel Passed;
@@ -58,7 +58,7 @@ if(gameScreen==1){
  Level1.lives --; 
  Level1.timer = new Timer(65);
  Level1.coinarray();  
-// Level1.draw_path();
+
  }
  else if (gameScreen==2)
   {
@@ -136,8 +136,7 @@ gameScreen = 6;
 bgEnd.resize(990,1000);
 background(bgEnd);
 text("Congratulations!.you passed all levels",width/2-(textWidth("press spacepar to play next level") / 2),850);
-//endscreen.EndText();
-//endscreen.EndMenu();
+
 }
 
 void endgame(){
@@ -153,17 +152,23 @@ void endgame(){
      if (l==1 )
      {
       gameScreen=1;
+       Level1.frog.x=0.25*grid;
+       Level1.frog.y=height-0.75*grid;
       Level1.lives=4;
      }
      
      else if (l==2)
      {
       gameScreen=2;
+      level2.frog.x=width/2-(0.75*grid)/2;
+      level2.frog.y=height-0.75*grid;
       level2.lives=4;
      }
      else if (l==3)
      {
       gameScreen=3;
+      level3.frog.x=width/2-(0.75*grid)/2;
+      level3.frog.y=height-0.75*grid;
       level3.lives=4;
      }
      resetGame();
@@ -203,7 +208,7 @@ void keyPressed()
     }
     else
       {
-      //  gameScreen ++;
+     
         level2.lives=4;
         resetGame();
         redraw();
@@ -228,13 +233,12 @@ void keyPressed()
     resume.show_resume();
   }
     else  if(keyCode== ' ') {
-      //resetGame();
-      //loop();
+    
       if( (level2.lives==1 || level2.time<=0))
       {
       level2.lives=4;
       resetGame();
-    //  loop();
+  
       redraw();
       }
      
@@ -264,7 +268,7 @@ void keyPressed()
       {
       level3.lives=4;
       resetGame();
-    //  loop();
+   
       redraw();
       }
      

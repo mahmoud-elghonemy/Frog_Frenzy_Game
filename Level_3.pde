@@ -38,7 +38,7 @@ Level_3()
   // row1
    int in =0;
     for(int i=0; i<3 ;i++){
-     // float x = (width-grid)+ 420*i;
+     
      float x=i*300+grid; //width of car=100 
       muv_cars[in] = new Car(x, height-3*1.25*grid+40, 140 , 85,20,in);
       in++;
@@ -128,7 +128,7 @@ void Drawlevel3()
             logs.x=-100;
             logs.y=-100;
            } 
-          frog.w=0;
+          frog.x=-100;
          l=3;
          gameScreen =4;
         }
@@ -140,8 +140,7 @@ void Drawlevel3()
     }
   if( (frog.intersect(rectFinal))) //win
   {
-    //Passed= new passedLevel(0,0,width,height);
-    //Passed.win(3);
+  
     level3.frog.x=-100;
     gameScreen=6;
     gameScreen=6;
@@ -152,7 +151,7 @@ void Drawlevel3()
   timer.countDown(); 
   time=timer.getTime();
   if(time<=0 && this.lives ==1){
-    frog.w=0;
+    frog.x=-100;
       l=3;
       gameScreen=4;
   }
@@ -198,7 +197,7 @@ void Drawlevel3()
             logs.x=-100;
             logs.y=-100;
            } 
-          frog.w=0;
+          frog.x=-100;
           l=3;
           gameScreen=4;
         }
@@ -237,12 +236,7 @@ void Drawlevel3()
     resetGame();
       redraw();
   }
- /* else if(keyCode== ' ' ){ //win
-    gameScreen=6;
-   // this.lives=4;
-    resetGame();
-      redraw();
-  }*/
+
   else {
     frog.showUp();
   }

@@ -6,7 +6,7 @@ resume(float x, float y, float w, float h)
 }
 void show_resume()
 {
-  //backgound(210, 44, 44,50);
+  
   fill(0,0,0,200);
   rect(this.x,this.y,this.w,this.h,20);
   
@@ -25,13 +25,7 @@ void show_resume()
   fill(0);
   textSize(30); 
   text("exit",this.x-textWidth("exit")/2,this.y+20-((textAscent() - textDescent()) / 2));
-  /*
-  fill(210, 44, 44); //Button margin colour
-  rect(this.x, this.y+100, 200, 50, 20); //Drawing the button
-  fill(0);
-  textSize(30); 
-  text("exit",this.x-textWidth("exit")/2,this.y+100+20-((textAscent() - textDescent()) / 2));
-  */
+  
 if (mouseX > this.x-100 && mouseX < this.x +100 
       && mouseY > this.y-150 && mouseY < this.y-100) { //pointer collision with Button2
         if (mousePressed) { 
@@ -46,6 +40,7 @@ if (mouseX > this.x-100 && mouseX < this.x +100
         if (mousePressed) { 
           exit();
         }
+         
         fill(210, 44, 44,100); //Button margin colour
         rect(this.x, this.y-100, 200, 50, 20); //Drawing the button
       }

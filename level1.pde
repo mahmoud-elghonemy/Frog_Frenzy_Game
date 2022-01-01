@@ -8,8 +8,10 @@ int lives=4;
 Timer timer; 
 int index=0;
 rectangle rect,rect2,rect3,rect4;
-
+  PImage  water;
 level1(){
+        water = loadImage("data/water.jpg");
+      water.resize(990,1000);
     this.score=0;
     this.timer = new Timer(65);
     this.frog = new Frog(0.25*grid, height-0.75*grid, 0.75*grid);
@@ -39,7 +41,7 @@ void coinarray(){
 
 void drawlevel1(){
 
- background(255);
+ background(water);
   rect.DrawRec();
   rect2.DrawRec();
   rect3.DrawRec();
@@ -51,8 +53,7 @@ void drawlevel1(){
   for (path pat : paths) {
     pat.show();
     if(frog.intersect(paths[29])){
-     // Passed= new passedLevel(0,0,width,height);
-      //Passed.win(1);
+    
     frog.x=-100;
     for (Coin coins : Level1.coin) {
             coins.x=-100;
@@ -70,9 +71,8 @@ void drawlevel1(){
             coins.x=-100;
             coins.y=-100;
            }
-          frog.w=0;
-        //  over=new gameOver(0,0,width,height);
-       //   over.endgame();
+          frog.x=-100;
+       
        l=1;
        gameScreen=4;
         }
@@ -91,17 +91,16 @@ void drawlevel1(){
      coins.x=-100;
        coins.y=-100;
     }
-    frog.w=0;
+    frog.x=-100;
   
-  //over=new gameOver(0,0,width,height);
-      //   over.endgame();
+
       l=1;
       gameScreen =4;
          
   }
    else if(time<=0)
    {
-       frog.x=0.25*grid;
+        frog.x=0.25*grid;
         frog.y=height-0.75*grid;
         resetGame();
    }
@@ -138,13 +137,7 @@ void drawlevel1(){
       this.lives=4;
       resetGame();
       redraw();
-  }/*
-  else if(keyCode== ' '){
-      gameScreen=2;
-      level2.lives=4;
-      resetGame();
-      redraw();
-  }*/
+  }
   else {
     frog.showUp();
   }

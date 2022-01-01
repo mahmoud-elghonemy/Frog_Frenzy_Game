@@ -38,7 +38,7 @@ Level_2()
   // row1
    int in =0;
     for(int i=0; i<3 ;i++){
-     // float x = (width-grid)+ 420*i;
+    
      float x=i*300+grid; //width of car=100 
       muv_cars[in] = new Car(x, height- 6.2*grid, 140 , 85,15,in);
       in++;
@@ -48,33 +48,7 @@ Level_2()
      muv_cars[in] = new Car(x, height-8.3*grid, 140 , 85,-15,in);
      in++;
     }
-  /*
-    int in =0;
-    for(int i=0; i<3 ;i++){
-     // float x = (width-grid)+ 420*i;
-     float x=i*50+150;
-    cars1[in++] = new Car(x, height- 6.6*grid, 100 , 85,50);
-    
-    }
-    //row2
-    for(int i=0; i<2 ;i++){
-      float x =  430*i;
-    cars1[in++] = new Car(x, height-8*grid, 140 , 85,-70);
-    }
-    
-    
-   for(int i=0;i<5;i++)
-   {
-     arrRnd[0][i]=random(0,width);
-     arrRnd[1][i]=random(rect2.y,rect2.y+rect2.h-50);
-    } 
-      Icar[0]=loadShape("data/images/car9.svg");
-      Icar[1]=Icar[0];
-      Icar[2]=Icar[0];
-      IcarI[0]=blue_car;
-      IcarI[1]=blue_car;
-      */
-      
+  
       for(int i=0;i<3;i++) // fixed cars
       {
         cars[i]=new Car(i*300+grid,height-3*1.25*grid+40,150,75,0,0);
@@ -131,29 +105,7 @@ Level_2()
        muv_cars[i].update();
        }
        //cars in row road one
-       /*
-       cars[0]=new Car(arrRnd[0][0],arrRnd[1][0],150,75,0,0);
-       
-       boolean bb=true;
-       for(int i=1;i<5;i++)
-       {   
-         cars[i]=new Car(arrRnd[0][i],arrRnd[1][i],150,75,0,i);
-         for(int j=0;j<=i;j++)
-         {
-             if(!(cars[i].intersect(cars[j])) && bb==true)
-             {  bb=false;
-                
-             }
-             else {
-               break;
-             }
-         }
-         if(!bb)
-         {
-          // shape(Icar[i],cars[i].x,cars[i].y,cars[i].w,cars[i].h);
-         }
-         bb=true;
-        } */
+     
         
         //intersect car
             if( (frog.intersect(muv_cars[0])) || (frog.intersect(muv_cars[1])) || (frog.intersect(muv_cars[2]))
@@ -166,7 +118,7 @@ Level_2()
             coins.x=-100;
             coins.y=-100;
            }
-          frog.w=0;
+          frog.x=-100;
           l=2;
           gameScreen =4;
         }
@@ -178,8 +130,7 @@ Level_2()
     }
   if( (frog.intersect(rectFinal))) //win
   {
-    //Passed= new passedLevel(0,0,width,height);
-   // Passed.win(2);
+   
       frog.x=-100;
       for (Coin coins : level2.coin) {
             coins.x=-100;
@@ -198,7 +149,8 @@ Level_2()
      coins.x=-100;
        coins.y=-100;
     }
-    frog.w=0;
+    frog.x=-100;
+    
     l=2;
     gameScreen =4;
   }
@@ -219,7 +171,7 @@ Level_2()
     }
     }
     
-   // move_car();
+   
          //frog
   if (keyCode == UP){
     frog.showUp();
@@ -243,13 +195,7 @@ Level_2()
     this.lives=4;
     resetGame();
       redraw();
-  }/*
-  else if(keyCode== ' ' ){ //win
-    gameScreen=3;
-    this.lives=4;
-    resetGame();
-      redraw();
-  }*/
+  }
   else {
     frog.showUp();
   }

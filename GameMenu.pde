@@ -29,8 +29,7 @@ class GameMenu {
     text("Quit", 800 - (textWidth("Quit") / 2), 850 + ((textAscent() - textDescent()) / 2) + 75);
     
     
-    //rect(width/2, height/2 + 75, 200, 50, 20); //Drawing the button
-    //fill(255); //Font colour for inside of the button
+   
     
     if (Menu) {
       if (mouseX > 800 - 100 && mouseX < 800 + 100 
@@ -40,12 +39,7 @@ class GameMenu {
           file.loop();
           gameScreen=1;
           resetGame();
-          //resetGame();
-          //Level1.drawlevel1();
-          //fill(255, 77, 80, Button4); //Button margin colour
-          //draw_back();
-          //TimerDisplay();
-         // resetGame();
+          
         }
         if (Button1 < 150) { //Highlighting effect by darkening the colour for button 1
           Button1 += 200;

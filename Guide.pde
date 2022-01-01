@@ -21,8 +21,11 @@ class GuideScreen {
     textSize(20);
     text("and collect more coins to get high score",(width /2) -(textWidth("and collect more coins to get high score") /2),250 );
     
+    textSize(20);
+    text("pause game press button Enter",(width /2) -(textWidth("pause game press button Enter") /2),290);
+    
     textSize(28);
-    text("Good Luck!", (width /2) - (textWidth("Good Luck!") / 2), 310);  
+    text("Good Luck!", (width /2) - (textWidth("Good Luck!") / 2), 330);  
   }
   
   void GuideMenu() {  
