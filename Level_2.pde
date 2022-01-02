@@ -5,7 +5,7 @@ class Level_2 {
         int lives=4;
         Timer timer; 
         float time;
-        float grid = 100;
+        float grid = 85;
         Car cars[];
         // muv car
         Car muv_cars[];
@@ -15,13 +15,13 @@ PImage IRec2,IRec3,IRec4;
 
 Level_2()
   { 
-     rect1=new rectangle(0 ,height-1.25*grid ,width,1.25*grid);
-     rect2=new rectangle(0 ,height-3*1.25*grid ,width,2*1.25*grid);
-     rect3=new rectangle(0 ,height-4*1.25*grid ,width,1.25*grid);
-     rect4=new rectangle(0 ,height-7*1.25*grid ,width,3*1.25*grid);
-     rect5=new rectangle(0 ,0,width,1.25*grid);
+     rect1=new rectangle(0 ,height-grid ,width,grid);
+     rect2=new rectangle(0 ,height-3*grid ,width,2*grid);
+     rect3=new rectangle(0 ,height-4*grid ,width,grid);
+     rect4=new rectangle(0 ,height-7*grid ,width,3*grid);
+     rect5=new rectangle(0 ,0,width,grid);
      
-     rectFinal=new rectangle(width-grid,0,grid,1.25*grid); //winning rect
+     rectFinal=new rectangle(width-grid,0,grid,1*grid); //winning rect
      
      IRec2=loadImage("data/images/road.jpg"); //road
      IRec3=loadImage("data/images/green2.jpg"); //grass
@@ -29,7 +29,7 @@ Level_2()
      
     score=0;
     timer = new Timer(65);
-    frog = new Frog(width/2-(0.75*grid)/2, height-0.75*grid, 0.75*grid);
+    frog = new Frog(width/2-(grid)/2, height-0.65*grid, 0.65*grid);
     
     coin = new Coin[12];
     cars = new Car[6];
@@ -40,24 +40,24 @@ Level_2()
     int in =0;
     for(int i=0; i<3 ;i++){
     
-     float x=i*300+grid; //width of car=100 
-      muv_cars[in] = new Car(x, height- 6.2*grid, 140 , 85,15,in);
+     float x=i*270+grid; //width of car=100 
+      muv_cars[in] = new Car(x, height- 5.1*grid, 110 , 60,15,in);
       in++;
     }
     for(int i=0; i<3 ;i++){
-      float x =  width-i*300-grid;
-     muv_cars[in] = new Car(x, height-8.3*grid, 140 , 85,-15,in);
+      float x =  width-i*270-grid;
+     muv_cars[in] = new Car(x, height-6.7*grid, 110 , 60,-15,in);
      in++;
     }
   
       for(int i=0;i<3;i++) // fixed cars
       {
-        cars[i]=new Car(i*300+grid,height-3*1.25*grid+40,150,75,0,0);
+        cars[i]=new Car(i*250+grid,height-1.9*grid,110 , 60,0,0);
       }
       int j=0;
       for(int i=3;i<6;i++) // fixed cars
       {
-        cars[i]=new Car(width-j*300-150,height-3*1.25*grid+150,150,75,0,0);
+        cars[i]=new Car(width-j*250-150,height-2.8*grid,110 , 60,0,0);
         j++;
       }
   }
@@ -67,15 +67,15 @@ Level_2()
   int k=0;
  for ( int i =0; i<3; i++){
     for(int j =0; j<4; j++){
-    float x=0.75*grid + j*250;
+    float x=grid + j*150;
       float y;
     if (i <= 1){
-        y= height- grid - i*3*1.25*grid+20;
+        y= height- grid - i*3*grid+35;
     }
     else{
-          y= height- grid - i*3*1.45*grid+25;
+          y= height- grid - i*3*grid-40;
     }
-    coin[k++]= new Coin(x , y, 80);
+    coin[k++]= new Coin(x , y, 50);
    
     }
   }
@@ -188,7 +188,7 @@ Level_2()
   }
   else if (keyCode == ENTER){
     timer.stopTime();
-    resume resume=new resume(500,500,500,500);
+    resume resume=new resume(140,140,400,400);
     resume.show_resume();
   }
   else if(keyCode== ' '  && (this.lives==1 || time<=0)){

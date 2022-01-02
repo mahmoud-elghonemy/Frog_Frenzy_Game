@@ -7,7 +7,7 @@ String audioName = "data/sounds/frogger-sound.wav";
 String p;
 
 //create variables
-int gameScreen = 1; //why zero start intro screen 
+int gameScreen = 0; //why zero start intro screen 
 int l=0;
 PImage bg,bgGuide,bgEnd,loss;
 PFont font;
@@ -32,7 +32,7 @@ void setup(){
   resetGame(); // default game  
   
   loss=loadImage("data/images/lossfrog.jpeg");
-  loss.resize(600,300);
+  loss.resize(400,200);
   font = loadFont("data/Fonts/ArialUnicodeMS-48.vlw");
   textFont(font);
   
@@ -51,7 +51,7 @@ void setup(){
   bg = loadImage("data/images/intro game.png");
   bgGuide =loadImage("data/images/froggerGuide800-650.png");
   bgEnd=loadImage("data/images/froggerWin800-650.jpeg");
-  rectMode(CENTER); //center the rectangle
+ 
   stroke(245, 245, 245); //button border
   textSize(45); //text inside buttons
   noStroke();
@@ -219,7 +219,8 @@ void fourthScreen()
 gameScreen = 6; 
 bgEnd.resize(680,680);
 background(bgEnd);
-text("Congratulations!.you passed all levels",width/2-(textWidth("press spacepar to play next level") / 2),850);
+textSize(30);
+text("Congratulations!.you passed all levels",width/2-(textWidth("press spacepar to play next level") / 2),580);
 
 }
 
@@ -254,12 +255,12 @@ if(gameScreen==1){
 }
 void endgame(){
      
-     background(70,55,113,300);
-     image(loss,200,150);
-     textSize(100); 
-     text("GAME OVER",width/2-textWidth("GAME OVER")/2,550);
-     textSize(50); 
-     text("press spacepar to play again",width/2-textWidth("press spacepar to play again")/2,650);
+background(70,55,113,300);
+ image(loss,140,150);
+textSize(50);
+text("GAME OVER",width/2-textWidth("GAME OVER")/2,450);
+textSize(40);
+text("press spacepar to play again",width/2-textWidth("press spacepar to play again")/2,550);
    
    if(keyCode== ' '){
      if (l==1 )
@@ -334,33 +335,33 @@ void draw_back()
 //uses to write text number levels,score,time and draw cuore  
 void play(int gameScreen)
 {
-textSize(30);
+textSize(20);
 fill(225,255,255);
 if(gameScreen == 1)
 {
-  text("Level:1 ",width/2-textWidth("Level:1 ")/2-50,30);
-  text("score: "+ Level1.score,0,60);
-  text("Time: "+ round(Level1.time),0,100);
-  for(int i=0; i<Level1.lives; i++){
-  shape(cuore, 100+i*40, 10, 30,30);
- }
+text("Level:1 ",width/2-textWidth("Level:1 ")/2,20);
+text("score: "+ Level1.score,0,50);
+text("Time: "+ round(Level1.time),0,75);
+for(int i=0; i<Level1.lives; i++){
+shape(cuore,10+i*40, 10, 30,30);
+}
 }
 else if(gameScreen == 2)
 {
-  text("Level:2 ",width/2-textWidth("Level:2 ")/2,60);
-  text("score: "+ level2.score,0,60);
-text("Time: "+ round(level2.time),0,100);
- for(int i=0; i<level2.lives; i++){
-  shape(cuore, 10+i*40, 10, 30,30);
- }
+text("Level:2 ",width/2-textWidth("Level:2 ")/2,20);
+text("score: "+ level2.score,0,50);
+text("Time: "+ round(level2.time),0,75);
+for(int i=0; i<level2.lives; i++){
+shape(cuore, 10+i*40, 10, 30,30);
+}
 }
 else if(gameScreen == 3)
 {
-text("Level:3 ",width/2-textWidth("Level:3 ")/2,60);
-text("score: "+ level3.score,0,60);
-text("Time: "+ round(level3.time),0,100);
- for(int i=0; i<level3.lives; i++){
-  shape(cuore, 10+i*40, 10, 30,30);
- }
- }
+text("Level:3 ",width/2-textWidth("Level:3 ")/2,20);
+text("score: "+ level3.score,0,50);
+text("Time: "+ round(level3.time),0,75);
+for(int i=0; i<level3.lives; i++){
+shape(cuore, 10+i*40, 10, 30,30);
+}
+}
 }

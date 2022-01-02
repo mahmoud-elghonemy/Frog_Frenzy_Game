@@ -5,7 +5,7 @@ Frog frog;
 Coin coin[];
 Timer timer; 
 float time;
-float grid = 100;
+float grid = 85;
 Log log[];
 // muv car
 Car muv_cars[];
@@ -15,23 +15,23 @@ boolean ok = false;
 Level_3()
 {
      ok = false;
-     rect1=new rectangle(0 ,height-1.25*grid ,width,1.25*grid);
-     rect2=new rectangle(0 ,height-3*1.25*grid ,width,2*1.25*grid);
-     rect3=new rectangle(0 ,height-4*1.25*grid ,width,1.25*grid);
-     rect4=new rectangle(0 ,height-7*1.25*grid ,width,3*1.25*grid);
-     rect5=new rectangle(0 ,0,width,1.25*grid);
-     rectFinal=new rectangle(width-grid,0,grid,1.25*grid); //winning
+     rect1=new rectangle(0 ,height-grid ,width,grid);
+     rect2=new rectangle(0 ,height-3*grid ,width,2*grid);
+     rect3=new rectangle(0 ,height-4*grid ,width,grid);
+     rect4=new rectangle(0 ,height-7*grid ,width,3*grid);
+     rect5=new rectangle(0 ,0,width,grid);
+     rectFinal=new rectangle(width-grid,0,grid,grid); //winning
      
      IRec1=loadImage("data/images/water.jpg"); //water
      IRec2=loadImage("data/images/road.jpg"); //road
      IRec3=loadImage("data/images/green2.jpg"); //grass
-     IRec4=loadImage("data/frog9.png"); //win
+     IRec4=loadImage("data/images/frog9.png"); //win
      coin = new Coin[12];
       //log
      
     score=0;
     timer = new Timer(65);
-    frog = new Frog(width/2-(0.75*grid)/2, height-0.75*grid, 0.75*grid);
+    frog = new Frog(width/2-(grid)/2, height-0.65*grid, 0.65*grid);
     
     // muv car array
     muv_cars = new Car[6];
@@ -39,14 +39,14 @@ Level_3()
    int in =0;
     for(int i=0; i<3 ;i++){
      
-     float x=i*300+grid; //width of car=100 
-      muv_cars[in] = new Car(x, height-3*1.25*grid+40, 140 , 85,20,in);
+     float x=i*200+grid; //width of car=100 
+      muv_cars[in] = new Car(x, height-2.8*grid, 110 , 60,10,in);
       in++;
       //row2
     }
     for(int i=0; i<3 ;i++){
       float x =  width-i*300-grid;
-     muv_cars[in] = new Car(x, height-3*1.25*grid+150, 140 , 85,-15,in);
+     muv_cars[in] = new Car(x, height-1.8*grid, 110 , 60,-5,in);
      in++;
     }
     
@@ -57,41 +57,44 @@ Level_3()
   // ROW 3
     int in=0;
   for (int i = 0; i < 2; i++) {
-    float x = i * 450 + 100;
-    log[in] = new Log(x, height-grid*6, 3*grid, 0.7*grid, 20,in);
+    float x = i *300 + 100;
+    log[in] = new Log(x, height-grid*5, 2*grid, 0.5*grid, 15,in);
     in++;
   }
   // ROW 4
   for (int i = 0; i < 3; i++) {
-    float x = i * 400 + 30;
-    log[in] = new Log(x, height-grid*7.2, grid*2.5,0.7* grid, -15,in);
+    float x = i * 250 + 30;
+    log[in] = new Log(x, height-grid*5.8, 2*grid, 0.5*grid, -15,in);
     in++;
   }
   // ROW 5
   for (int i = 0; i < 2; i++) {
-    float x = i * 430 + 10;
-    log[in] = new Log(x, height-grid*8.4, grid*3, 0.7*grid, 10,in);
+    float x = i *320 + 10;
+    log[in] = new Log(x, height-grid*6.8, 2*grid, 0.5*grid, 10,in);
     in++;
   }
  
  }
 
- void coinarray(){
+  void coinarray(){
   int k=0;
  for ( int i =0; i<3; i++){
     for(int j =0; j<4; j++){
-    float x=0.75*grid + j*250;
+    float x=grid + j*150;
       float y;
     if (i <= 1){
-        y= height- grid - i*3*1.25*grid+20;
+        y= height- grid - i*3*grid+35;
     }
     else{
-          y= height- grid - i*3*1.45*grid+25;
+          y= height- grid - i*3*grid-40;
     }
-    coin[k++]= new Coin(x , y, 80);
+    coin[k++]= new Coin(x , y, 50);
    
     }
-  }}
+  }
+
+
+}
 
 void Drawlevel3()
 {
@@ -227,7 +230,7 @@ void Drawlevel3()
   }
   else if (keyCode == ENTER){
     timer.stopTime();
-    resume resume=new resume(500,500,500,500);
+    resume resume=new resume(140,140,400,400);
     resume.show_resume();
   }
   else if(keyCode== ' '  && (this.lives==1 || time<=0)){

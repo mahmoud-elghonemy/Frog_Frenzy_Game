@@ -129,7 +129,7 @@ void drawlevel1(){
   }
   else if (keyCode == ENTER){
     timer.stopTime();
-    resume resume=new resume(500,500,500,500);
+     resume resume=new resume(140,140,400,400);
     resume.show_resume();
   }
   else if(keyCode== ' ' && (lives==0)){
