@@ -6,18 +6,19 @@ class Frog extends rectangle{
      super(x,y,w, w);
      
      //loading images
-     up = loadImage("data/up.png");
+     up = loadImage("data/images/up.png");
      up.resize((int)w, (int)w);
      
-     down = loadImage("data/down.png");
+     down = loadImage("data/images/down.png");
      down.resize((int)w, (int)w);
      
-     left = loadImage("data/left.png");
+     left = loadImage("data/images/left.png");
      left.resize((int)w, (int)w);
      
-     right = loadImage("data/right.png");
+     right = loadImage("data/images/right.png");
      right.resize((int)w, (int)w);
   }
+  
   // attach log
   void attach(Log log) {
     attached = log;
@@ -50,7 +51,8 @@ class Frog extends rectangle{
   
    
   void update()
-  {
+  {  
+     //
      if (attached != null) {
       x += attached.speed;
     }
@@ -66,7 +68,7 @@ class Frog extends rectangle{
     y += ydir *1.25*grid;
     x =constrain(x,0,width-w);
     y=constrain(y,+25,height-h);
-    //attach(null);
+   
   }
    
 }

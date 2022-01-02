@@ -1,5 +1,5 @@
 class Coin extends rectangle{
- int picW = 839;
+  int picW = 839;
   int picH = 187;
   PImage coins;
   PImage []coin; 
@@ -7,14 +7,13 @@ class Coin extends rectangle{
   int i;
   PImage coinn; // rotate coin 
   PShape image;
- float angle = 0.02;
+  float angle = 0.02; //angle uses rotate conin
 
 Coin(float x, float y, float w){
 
-super(x,y,w,w);
+     super(x,y,w,w);
     
-   
-    image = loadShape("gold.svg");
+    image = loadShape("data/images/gold.svg");
    
 }
 

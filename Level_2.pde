@@ -1,14 +1,14 @@
 class Level_2 {
-int score=0;
-Frog frog;
-Coin coin[];
-int lives=4;
-Timer timer; 
-float time;
-float grid = 100;
-Car cars[];
-// muv car
-Car muv_cars[];
+        int score=0;
+        Frog frog;
+        Coin coin[];
+        int lives=4;
+        Timer timer; 
+        float time;
+        float grid = 100;
+        Car cars[];
+        // muv car
+        Car muv_cars[];
 
 rectangle rect1,rect2,rect3,rect4,rect5,rectFinal;
 PImage IRec2,IRec3,IRec4;
@@ -20,11 +20,12 @@ Level_2()
      rect3=new rectangle(0 ,height-4*1.25*grid ,width,1.25*grid);
      rect4=new rectangle(0 ,height-7*1.25*grid ,width,3*1.25*grid);
      rect5=new rectangle(0 ,0,width,1.25*grid);
-     rectFinal=new rectangle(width-grid,0,grid,1.25*grid); //winning
+     
+     rectFinal=new rectangle(width-grid,0,grid,1.25*grid); //winning rect
      
      IRec2=loadImage("data/images/road.jpg"); //road
      IRec3=loadImage("data/images/green2.jpg"); //grass
-     IRec4=loadImage("data/frog9.png");
+     IRec4=loadImage("data/images/frog9.png");
      
     score=0;
     timer = new Timer(65);
@@ -36,7 +37,7 @@ Level_2()
     // muv car array
     muv_cars = new Car[6];
   // row1
-   int in =0;
+    int in =0;
     for(int i=0; i<3 ;i++){
     
      float x=i*300+grid; //width of car=100 

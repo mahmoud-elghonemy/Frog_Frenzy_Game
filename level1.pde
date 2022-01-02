@@ -1,22 +1,23 @@
 class level1{
-float time;
-int score=0;
-Frog frog;
-path paths[];
-Coin coin[];
-int lives=4;
-Timer timer; 
-int index=0;
-rectangle rect,rect2,rect3,rect4;
-  PImage  water;
+              float time;
+              int score=0;
+              Frog frog;
+              path paths[];
+              Coin coin[];
+              int lives=4;
+              Timer timer; 
+              int index=0;
+              rectangle rect,rect2,rect3,rect4;
+               PImage  water;
 level1(){
-        water = loadImage("data/water.jpg");
+        water = loadImage("data/images/water.jpg");
       water.resize(990,1000);
     this.score=0;
     this.timer = new Timer(65);
     this.frog = new Frog(0.25*grid, height-0.75*grid, 0.75*grid);
     this.paths =  new path[36];
     this.coin = new Coin[16];  
+    
   rect=new rectangle(1.25*grid,height-(1.25*grid),width-1.25*grid,1.25*grid);
   rect2=new rectangle(0,height-3*1.25*grid,width-1.25*grid,1.25*grid);
   rect3=new rectangle(1.25*grid,height-5*1.25*grid,width-1.25*grid,1.25*grid);
@@ -47,11 +48,10 @@ void drawlevel1(){
   rect3.DrawRec();
   rect4.DrawRec();
  
-  //coinreset();
-  
- // c.showCoin();
+
   for (path pat : paths) {
     pat.show();
+    //when finsh level one 
     if(frog.intersect(paths[29])){
     
     frog.x=-100;
@@ -74,7 +74,7 @@ void drawlevel1(){
           frog.x=-100;
        
        l=1;
-       gameScreen=4;
+       gameScreen=4; 
         }
        else{
         frog.x=0.25*grid;
@@ -95,7 +95,7 @@ void drawlevel1(){
   
 
       l=1;
-      gameScreen =4;
+      gameScreen =4; //game over
          
   }
    else if(time<=0)
@@ -141,7 +141,7 @@ void drawlevel1(){
   else {
     frog.showUp();
   }
-play(1);
+play(1); //inital wrtite level one and time in screen 
 }
 //end draw
 void draw_path()

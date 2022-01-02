@@ -14,14 +14,17 @@ void show_resume()
   textSize(40); 
   text("if you want to continue   ",this.x-textWidth("if you want to continue ")/2,this.y+100+20-((textAscent() - textDescent()) / 2));
   text("playing press space",this.x-textWidth(" playing press space")/2,this.y+100+80-((textAscent() - textDescent()) / 2));
+  
   fill(210, 44, 44); //Button margin colour
   rect(this.x, this.y-100, 200, 50, 20); //Drawing the button
+  
   fill(0);
   textSize(30); 
   text("home",this.x-textWidth("home")/2,this.y-100+20-((textAscent() - textDescent()) / 2));
   
   fill(210, 44, 44); //Button margin colour
   rect(this.x, this.y, 200, 50, 20); //Drawing the button
+ 
   fill(0);
   textSize(30); 
   text("exit",this.x-textWidth("exit")/2,this.y+20-((textAscent() - textDescent()) / 2));

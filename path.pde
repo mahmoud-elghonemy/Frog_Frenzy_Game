@@ -1,5 +1,5 @@
 class path extends rectangle{
-   PImage ww=loadImage("data/log.png");
+   PImage ww=loadImage("data/images/log.png");
    path(float x, float y, float w, float h){
    super(x,y,w,h);
   }
