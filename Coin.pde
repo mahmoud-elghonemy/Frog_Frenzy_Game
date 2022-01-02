@@ -1,11 +1,6 @@
 class Coin extends rectangle{
-  int picW = 839;
-  int picH = 187;
-  PImage coins;
-  PImage []coin; 
-  int imgLength;
-  int i;
-  PImage coinn; // rotate coin 
+
+ 
   PShape image;
   float angle = 0.02; //angle uses rotate conin
 

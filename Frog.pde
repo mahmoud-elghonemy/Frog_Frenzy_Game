@@ -28,25 +28,25 @@ class Frog extends rectangle{
   //frog up
   void showUp()
   {
-    image(up, this.x, this.y-25);
+    image(up, this.x, this.y-15);
   }
 
   //frog down
   void showDown()
   {
-    image(down, x, y-25);
+    image(down, x, y-15);
   }
 
   //frog left
   void showLeft()
   {
-    image(left, x, y-25);
+    image(left, x, y-15);
   }
 
   //frog right
   void showRight()
   {
-    image(right, x, y-25);
+    image(right, x, y-15);
   }
   
    
@@ -64,8 +64,8 @@ class Frog extends rectangle{
   void move(float xdir, float ydir)
   {
     
-    x += xdir *1.25*grid;
-    y += ydir *1.25*grid;
+    x += xdir *1*grid;
+    y += ydir *1*grid;
     x =constrain(x,0,width-w);
     y=constrain(y,+25,height-h);
    

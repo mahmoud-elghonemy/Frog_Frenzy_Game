@@ -11,17 +11,17 @@ class level1{
                PImage  water;
 level1(){
         water = loadImage("data/images/water.jpg");
-      water.resize(990,1000);
+      water.resize(680,680);
     this.score=0;
     this.timer = new Timer(65);
-    this.frog = new Frog(0.25*grid, height-0.75*grid, 0.75*grid);
+    this.frog = new Frog(0.15*grid, height-0.65*grid, 0.65*grid);
     this.paths =  new path[36];
     this.coin = new Coin[16];  
     
-  rect=new rectangle(1.25*grid,height-(1.25*grid),width-1.25*grid,1.25*grid);
-  rect2=new rectangle(0,height-3*1.25*grid,width-1.25*grid,1.25*grid);
-  rect3=new rectangle(1.25*grid,height-5*1.25*grid,width-1.25*grid,1.25*grid);
-  rect4=new rectangle(0,height-7*1.25*grid,width-1.25*grid,1.25*grid);
+  rect=new rectangle(grid,height-grid,width-grid,grid);
+  rect2=new rectangle(0,height-3*grid,width-grid,grid);
+  rect3=new rectangle(grid,height-5*grid,width-grid,grid);
+  rect4=new rectangle(0,height-7*grid,width-grid,grid);
   
   draw_path();
   }//end constractor
@@ -31,9 +31,9 @@ void coinarray(){
  for ( int i =0; i<4; i++){
     for(int j =0; j<4; j++){
       
-     x=2.5*grid + j*130+50;
-    float y= height- 1.75*1.25*grid-i*2*1.25*grid+20;
-    coin[k++]= new Coin(x , y, 80);
+     x=2*grid + j*85+50;
+    float y= height- 1.75*1*grid-i*2*1*grid+20;
+    coin[k++]= new Coin(x , y, 60);
     }
   }
 
@@ -77,8 +77,8 @@ void drawlevel1(){
        gameScreen=4; 
         }
        else{
-        frog.x=0.25*grid;
-        frog.y=height-0.75*grid;
+        frog.x=0.15*grid;
+        frog.y=height-0.65*grid;
         resetGame();
          }
     }
@@ -100,8 +100,8 @@ void drawlevel1(){
   }
    else if(time<=0)
    {
-        frog.x=0.25*grid;
-        frog.y=height-0.75*grid;
+          frog.x=0.15*grid;
+        frog.y=height-0.65*grid;
         resetGame();
    }
   for (Coin coins : coin) {
@@ -132,7 +132,7 @@ void drawlevel1(){
     resume resume=new resume(500,500,500,500);
     resume.show_resume();
   }
-  else if(keyCode== ' ' && (lives==0 || time<=0)){
+  else if(keyCode== ' ' && (lives==0)){
       gameScreen=1;
       this.lives=4;
       resetGame();
@@ -150,8 +150,8 @@ void draw_path()
   int index=0;
    for (int i = 0; i < 2; i++) {
     float x =0;
-    float y= height-1.25*grid-1.25*i*grid;
-    paths[index] = new path(x, y, 1.25*grid, 1.25*grid);
+    float y= height-1*grid-1*i*grid;
+    paths[index] = new path(x, y, 1*grid, 1*grid);
     index++;
   }
  
@@ -159,55 +159,55 @@ void draw_path()
    
   
   for (int i = 0; i < 7; i++) {
-   float x = 1.25*grid+i*1.25*grid;
-   float y= height-2*1.25*grid;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
+   float x = 1*grid+i*1*grid;
+   float y= height-2*1*grid;
+    paths[index] = new path(x, y, grid*1, grid*1);
    index++;
   }
   
   //row3
    for (int i = 0; i < 2; i++) {
-    float x = width-1.25*grid;
-  float y= height-3*1.25*grid-1.25*i*grid;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
+    float x = width-1*grid;
+  float y= height-3*1*grid-1*i*grid;
+    paths[index] = new path(x, y, grid*1, grid*1);
     index++;
   }
   
   //row4
    for (int i = 0; i < 7; i++) {
-   float x = width-2*1.25*grid-i*grid*1.25;
-   float y= height-4*1.25*grid;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
+   float x = width-2*1*grid-i*grid*1;
+   float y= height-4*1*grid;
+    paths[index] = new path(x, y, grid*1, grid*1);
    index++;
   }
   
   //row5
    for (int i = 0; i < 2; i++) {
     float x = 0;
-    float y= height-5*1.25*grid-i*grid*1.25;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
+    float y= height-5*1*grid-i*grid*1;
+    paths[index] = new path(x, y, grid*1, grid*1);
     index++;
   }
   
   //row6
    for (int i = 0; i < 7; i++) {
-   float x = 1.25*grid+i*1.25*grid;
-   float y= height-6*1.25*grid;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
+   float x = 1*grid+i*1*grid;
+   float y= height-6*grid;
+    paths[index] = new path(x, y, grid*1, grid*1);
    index++;
   }
   //row7
     for (int i = 0; i < 2; i++) {
-    float x = width-1.25*grid;
-    float y= height-7*1.25*grid-i*grid*1.25;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
+    float x = width-1*grid;
+    float y= height-7*1*grid-i*grid*1;
+    paths[index] = new path(x, y, grid*1, grid*1);
     index++;
   }
   //row8
    for (int i = 0; i < 7; i++) {
-   float x =i*grid*1.25;
+   float x =i*grid*1;
    float y= 0;
-    paths[index] = new path(x, y, grid*1.25, grid*1.25);
+    paths[index] = new path(x, y, grid*1, grid*1);
    index++;
   }
 }

@@ -7,11 +7,11 @@ String audioName = "data/sounds/frogger-sound.wav";
 String p;
 
 //create variables
-int gameScreen = 0; //why zero start intro screen 
+int gameScreen = 1; //why zero start intro screen 
 int l=0;
 PImage bg,bgGuide,bgEnd,loss;
 PFont font;
-float grid = 100;
+float grid =85;
 PShape cuore;
 
 //objects from classes
@@ -38,7 +38,7 @@ void setup(){
   
   cuore = loadShape("data/images/cuore.svg");
   
-  size(990,1000);// size game 
+  size(680,680);// size game 
  
    noStroke();
   
@@ -194,7 +194,7 @@ void keyPressed()
 //game menu first screen
 void firstScreen() {
   gameScreen = 0; 
-  bg.resize(990,1000);
+  bg.resize(680,680);
   background(bg);
   gamemenu.startMenu();
 }
@@ -204,7 +204,7 @@ void firstScreen() {
 void thirdScreen()
 {
   gameScreen = 5; 
-  bgGuide.resize(990,1000);
+  bgGuide.resize(680,680);
   background(bgGuide); 
   draw_back();
   guidescreen.GuideText();
@@ -217,7 +217,7 @@ void thirdScreen()
 void fourthScreen()
 {
 gameScreen = 6; 
-bgEnd.resize(990,1000);
+bgEnd.resize(680,680);
 background(bgEnd);
 text("Congratulations!.you passed all levels",width/2-(textWidth("press spacepar to play next level") / 2),850);
 
@@ -265,8 +265,8 @@ void endgame(){
      if (l==1 )
      {
       gameScreen=1;
-      Level1.frog.x=0.25*grid;
-      Level1.frog.y=height-0.75*grid;
+      Level1.frog.x=0.15*grid;
+      Level1.frog.y=height-0.65*grid;
       Level1.lives=4;
      }
      

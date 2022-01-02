@@ -4,7 +4,7 @@ class path extends rectangle{
    super(x,y,w,h);
   }
  void show(){
- fill(0,204,0);
+ 
  image(ww,this.x,this.y,this.w,this.w);
  }//end show
 }//end class
