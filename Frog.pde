@@ -52,7 +52,7 @@ class Frog extends rectangle{
    
   void update()
   {  
-     //
+     //attached with log
      if (attached != null) {
       x += attached.speed;
     }

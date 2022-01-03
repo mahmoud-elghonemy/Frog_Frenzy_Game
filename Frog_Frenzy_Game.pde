@@ -103,7 +103,7 @@ void keyPressed()
       Level1.frog.move(1,0);
     }
     else if (keyCode == ENTER){
-    resume resume=new resume(500,500,500,500);
+    resume resume=new resume(140,140,400,400);
     resume.show_resume();
   }
     else  if(keyCode== ' ') {
@@ -139,7 +139,7 @@ void keyPressed()
       level2.frog.move(1,0);
     }
     else if (keyCode == ENTER){
-    resume resume=new resume(500,500,500,500);
+    resume resume=new resume(140,140,400,400);
     resume.show_resume();
   }
     else  if(keyCode== ' ') {
@@ -170,7 +170,7 @@ void keyPressed()
       level3.frog.move(1,0);
     }
     else if (keyCode == ENTER){
-    resume resume=new resume(500,500,500,500);
+    resume resume=new resume(140,140,400,400);
     resume.show_resume();
   }
     else  if(keyCode== ' ') {

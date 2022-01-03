@@ -100,7 +100,7 @@ void drawlevel1(){
   }
    else if(time<=0)
    {
-          frog.x=0.15*grid;
+        frog.x=0.15*grid;
         frog.y=height-0.65*grid;
         resetGame();
    }
